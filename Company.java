@@ -1,7 +1,5 @@
 /*
-CSC 205: # 11210 / M 5:20 - 7:00 PM
-Program #1
-Author: Tyler Kass 36910537
+Author: Tyler Kass
 Description: We start off with a menu method that prints out the menu. We then go into main to use all of our
 other classes. We go to a do while loop like in MiniLab 2. Which then through all of our options. Option A adds an employee.
 If you go above 5 employees the entire program quits and throws an exception because you added to many employees.
