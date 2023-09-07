@@ -1,5 +1,5 @@
 /*
-Author: Tyler Kass 36910537
+Author: Tyler Kass
 Description: Administrative class has a parameterized constructor to store hours, salary, and name. It sets hoursper week
 gets the hours as well as pays out the Administrative Assistant Employees. We have three methods, which give a raise,
 as well as settings hoursper to hours changed.
