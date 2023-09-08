@@ -2,10 +2,10 @@
 Author: Tyler Kass
 Description: We start off with a menu method that prints out the menu. We then go into main to use all of our
 other classes. We go to a do while loop like in MiniLab 2. Which then through all of our options. Option A adds an employee.
-If you go above 5 employees the entire program quits and throws an exception because you added to many employees.
+If you go above 5 employees the entire program quits and throws an exception because you've added to many employees.
 b. Lists the employees along with the salary or hourly wage along with what kind of employee they are. C gives
 whatever employee you choose a raise. d gives paychecks to all employees. e you can change the hours of the hourly employees.
-If you choose a non-hourly employee it will say no employee found. f quits along with a print message saying bye!
+If you choose a non-hourly employee it will say no employee found. g quits along with a print message saying bye!
  */
 
 import java.util.*;
@@ -19,7 +19,8 @@ public class Company {
         System.out.println("c. Give an Employee a raise");
         System.out.println("d. Give Paychecks ");
         System.out.println("e. Change someone’s hours ");
-        System.out.println("f. Quit ");
+        System.out.println("f. Fire an Employee ");
+        System.out.println("g. Quit ");
     }
 
     public static void main(String[] args) {
@@ -168,17 +169,61 @@ public class Company {
                 }
             }
 
-            // Bottom two cases where it prints bye if f is chosen, and if no correct inputs are chose then invalid option appears
-            if (userInput == 'f' || userInput == 'F') {
-                break;
+            else if (userInput == 'f' || userInput == 'F') {
+                if (countEmployees == 0) {
+                    throw new IllegalArgumentException("Nobody works here!");
+                }
+                // Initial question + the input for name
+                System.out.println("Who would you like to fire?");
+                scnr.nextLine();
+                String userName = scnr.nextLine();
+
+                boolean match = false;
+                for (int i = 0; i < countEmployees; i++) {
+                    Employee employee1 = employee[i];
+                    AdministrativeAssistant administrativeAssistant = hourly[i];
+                    if (employee1 != null && employee1.getName().equalsIgnoreCase(userName)) {
+                        match = true;
+                        System.out.println("What is the reason you'd like to fire this employee? ");
+                        String reason = scnr.nextLine();
+
+                        for (int j = 1; j < countEmployees - 1; j++) {
+                            employee[j] = employee[j + 1];
+                        }
+                        countEmployees--;
+
+                        System.out.println(employee1.getName() + " has been fired. Reason: " + reason);
+                        break;
+                    }
+                    else if (administrativeAssistant != null && administrativeAssistant.getName().equalsIgnoreCase(userName)) {
+                        match = true;
+                        System.out.println("What is the reason you'd like to fire this administrative assistant? ");
+                        String reason = scnr.nextLine();
+
+                        for (int j = 1; j < countHourly - 1; j++) {
+                            hourly[j] = hourly[j + 1];
+                        }
+                        countHourly--;
+
+                        System.out.println(administrativeAssistant.getName() + " has been fired. Reason: " + reason);
+                        break;
+                    }
+                }
+                if (!match) {
+                    System.out.println("No employee with name: " + userName + " is found!");
+                }
+            }
+            // Bottom two cases where it prints bye if g is chosen, and if no correct inputs are chose then invalid option appears
+            if (userInput == 'g' || userInput == 'G') {
+
             }
             // makes sure that any other option can not be used
-            if (userInput != 'a' && userInput != 'b' && userInput != 'c' && userInput != 'd' && userInput != 'e' && userInput != 'f') {
+            if (userInput != 'a' && userInput != 'b' && userInput != 'c' && userInput != 'd' && userInput != 'e' && userInput != 'f' && userInput != 'g') {
                 System.out.println("Invalid option");
             }
             menu();
             userInput = scnr.next().toLowerCase().charAt(0);
-        } while (userInput != 'f' || userInput != 'F');
+        } while (userInput != 'g' || userInput != 'G');
         System.out.println("Bye!");
     }
 }
